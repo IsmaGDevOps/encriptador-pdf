@@ -3,10 +3,10 @@ import csv
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
 from PyPDF2 import PdfReader, PdfWriter
-import Levenshtein  # Asegúrate de instalar esta librería con `pip install python-Levenshtein`
+import Levenshtein
 
 def open_csv_editor(csv_file_var):
-    """Abre un editor para visualizar, modificar y completar el archivo CSV en un cuadro de diálogo."""
+    """Abre el editor para visualizar, modificar y completar el archivo CSV en un cuadro de diálogo."""
     csv_file = csv_file_var.get()
     if not csv_file:
         messagebox.showerror("Error", "Por favor, selecciona un archivo CSV primero.")
@@ -40,7 +40,7 @@ def open_csv_editor(csv_file_var):
     tree.column(1, width=300)
     tree.column(2, width=200)
 
-    # Rellenar la tabla con los datos del CSV
+    # Cumplimentar la tabla con los datos del CSV
     for row in rows:
         if len(row) >= 2:
             tree.insert("", tk.END, values=(row[0], row[1]))
@@ -182,10 +182,10 @@ def find_closest_match(file_name, passwords, threshold=0.7):
     return best_match
 
 def encrypt_pdfs(input_folder, output_folder, passwords, progress_callback=None):
-    """Encripta los PDFs usando las contraseñas proporcionadas."""
+    """Encripta los PDFs usando las contraseñas del listado CSV."""
     total_files = len([f for f in os.listdir(input_folder) if f.endswith('.pdf')])
     processed_files = 0
-    results = []  # Para guardar los resultados de encriptación
+    results = [] 
 
     for file in os.listdir(input_folder):
         if file.endswith('.pdf'):
